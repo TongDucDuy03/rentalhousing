@@ -1,11 +1,11 @@
 ﻿using đatn.Models; // Đảm bảo rằng bạn đã nhập namespace cho DbContext và các models khác
+using đatn.Repository;
+using đatn.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
 using System.Text;
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
@@ -23,6 +23,15 @@ var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
 // Đăng ký DbContext với DI Container
 builder.Services.AddDbContext<RentalHousingDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Đăng ký các repository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// Đăng ký các service
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
 // Thêm cấu hình xác thực JWT
 builder.Services.AddAuthentication(options =>
