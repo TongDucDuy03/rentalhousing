@@ -1,31 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bduc9\\training\\website\\rentalhousing\\Đatn\\DATN\\đatn\\đatn.csproj": {}
+    "D:\\Document\\CODE\\rentalhousing\\đatn\\đatn.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bduc9\\training\\website\\rentalhousing\\Đatn\\DATN\\đatn\\đatn.csproj": {
+    "D:\\Document\\CODE\\rentalhousing\\đatn\\đatn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bduc9\\training\\website\\rentalhousing\\Đatn\\DATN\\đatn\\đatn.csproj",
+        "projectUniqueName": "D:\\Document\\CODE\\rentalhousing\\đatn\\đatn.csproj",
         "projectName": "đatn",
-        "projectPath": "C:\\Users\\bduc9\\training\\website\\rentalhousing\\Đatn\\DATN\\đatn\\đatn.csproj",
-        "packagesPath": "C:\\Users\\bduc9\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bduc9\\training\\website\\rentalhousing\\Đatn\\DATN\\đatn\\obj\\",
+        "projectPath": "D:\\Document\\CODE\\rentalhousing\\đatn\\đatn.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Document\\CODE\\rentalhousing\\đatn\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\bduc9\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -39,17 +34,16 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.8, )"
@@ -88,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

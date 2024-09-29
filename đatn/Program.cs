@@ -1,41 +1,69 @@
-﻿using đatn.Models;
+﻿using đatn.Models; // Đảm bảo rằng bạn đã nhập namespace cho DbContext và các models khác
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Globalization;
+using System.Text;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
 
+// Thêm các dịch vụ vào container
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Cấu hình DbContext sử dụng SQL Server
+// Đọc cấu hình JWT từ appsettings.json
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+
+// Đăng ký DbContext với DI Container
 builder.Services.AddDbContext<RentalHousingDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add other services like controllers, etc.
-builder.Services.AddControllers();
+// Thêm cấu hình xác thực JWT
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(key)
+    };
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+// Sử dụng Swagger chỉ trong môi trường phát triển
+if (app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-    c.RoutePrefix = string.Empty; // Đặt trang Swagger ở root
-});
-
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
+// Sử dụng HTTPS redirection (nếu cần)
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
-app.UseRouting();
+// Sử dụng xác thực
+app.UseAuthentication();  // Sử dụng middleware xác thực JWT
 
+// Sử dụng phân quyền (authorization)
 app.UseAuthorization();
 
+// Map các controllers để gọi các endpoint API
 app.MapControllers();
 
+// Chạy ứng dụng
 app.Run();

@@ -20,9 +20,18 @@ namespace đatn.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<PropertyImage>()
+        .HasKey(pi => pi.ImageId);
+
+            modelBuilder.Entity<Property>()
+        .HasMany(p => p.PropertyImages)
+        .WithOne(pi => pi.Property)
+        .HasForeignKey(pi => pi.PropertyId);
+            modelBuilder.Entity<User>()
+        .HasKey(u => u.user_id);
 
             // Relationship configurations nếu cần thiết
-            modelBuilder.Entity<User>()
+            /*modelBuilder.Entity<User>()
                 .HasMany(u => u.SentMessages)
                 .WithOne(m => m.Sender)
                 .HasForeignKey(m => m.SenderId)
@@ -32,7 +41,7 @@ namespace đatn.Models
                 .HasMany(u => u.ReceivedMessages)
                 .WithOne(m => m.Receiver)
                 .HasForeignKey(m => m.ReceiverId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict);*/
         }
     }
 }
