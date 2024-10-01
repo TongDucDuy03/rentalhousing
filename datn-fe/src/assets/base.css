@@ -59,9 +59,11 @@
 }
 
 body {
-  min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  background-image: url('./images/đhxd.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #000;
+  min-height: 30vh;
   transition:
     color 0.5s,
     background-color 0.5s;
