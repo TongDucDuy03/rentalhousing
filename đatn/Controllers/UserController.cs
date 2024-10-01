@@ -4,7 +4,6 @@ using đatn.Models;
 using đatn.Service;
 
 [ApiController]
-[Route("api/[controller]")]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -15,7 +14,9 @@ public class UserController : ControllerBase
     }
 
     // Endpoint đăng ký người dùng
-    [HttpPost("register")]
+   
+    [Route("api/register")]
+    [HttpPost]
     public async Task<IActionResult> Register([FromBody] RegisterModel model)
     {
         if (model == null)
@@ -28,7 +29,9 @@ public class UserController : ControllerBase
     }
 
     // Endpoint đăng nhập người dùng
-    [HttpPost("login")]
+   
+    [Route("api/login")] 
+    [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
         if (model == null)
@@ -50,7 +53,9 @@ public class UserController : ControllerBase
     }
 
     // Endpoint lấy thông tin người dùng
-    [HttpGet("{userId}")]
+    
+    [Route("api/getUser/{userId}")]
+    [HttpGet]
     public async Task<IActionResult> GetUser(int userId)
     {
         var user = await _userService.GetUserAsync(userId);
@@ -63,7 +68,9 @@ public class UserController : ControllerBase
     }
 
     // Endpoint cập nhật thông tin người dùng
-    [HttpPut("{userId}")]
+     [Route("api/putUser/{userId}")]
+    [HttpPut]
+   
     public async Task<IActionResult> UpdateUser(int userId, [FromBody] User user)
     {
         var existingUser = await _userService.GetUserAsync(userId);
@@ -77,7 +84,9 @@ public class UserController : ControllerBase
     }
 
     // Endpoint xóa tài khoản người dùng
-    [HttpDelete("{userId}")]
+    
+    [Route("api/deleteUser/{userId}")]
+    [HttpDelete]
     public async Task<IActionResult> DeleteUser(int userId)
     {
         var existingUser = await _userService.GetUserAsync(userId);
