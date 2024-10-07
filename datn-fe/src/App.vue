@@ -1,11 +1,9 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import InfoUser from './components/InfoUser.vue'
-import WelcomeItem from './components/WelcomeItem.vue'
+import LoginUser from '../src/views/LoginUser.vue'
 </script>
 
 <template>
-  <InfoUser />
+   <LoginUser/> 
 </template>
 
 <style scoped>
@@ -26,19 +24,19 @@ nav {
   margin-top: 2rem;
 }
 
-nav a.router-link-exact-active {
+/* nav a.router-link-exact-active {
   color: var(--color-text);
-}
+} */
 
 nav a.router-link-exact-active:hover {
   background-color: transparent;
 }
 
-nav a {
+/* nav a {
   display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
-}
+} */
 
 nav a:first-of-type {
   border: 0;
@@ -69,5 +67,53 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+</style>
+<style>
+.btn{
+    align-items: center;
+    border-radius: 10px;
+    color: #fff;
+    display: inline-block;
+    line-height: 1.2;
+    transition: all 0.2s;
+    font-size: 14px;
+    padding: 15px 20px 14px;
+    background-color: #2997dd;
+    border-color: #2997dd;
+}
+.btn:hover{
+    background-color: #38dbf8;
+    border-color: #38dbf8;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+.btn-action{
+  width: 100%;
+    max-width: 250px;
+    text-align: center;
+    border: 1px solid #2997dd;
+    color: #2997dd;
+    padding: 5px 0;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 12px;
 }
 </style>

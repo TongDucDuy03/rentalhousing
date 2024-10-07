@@ -63,7 +63,7 @@
                 <button
                   type="button"
                   nh-btn-action="button"
-                  class="btn btn-highlight"
+                  class="btn"
                   @click="SaveChange"
                 >
                   Save changes
@@ -73,7 +73,7 @@
               </form>
 
               <div class="info-profile-bottom">
-                <div class="title">Delete Account</div>
+                <div class="titles">Delete Account</div>
                 <p>
                   You can delete your account permanently. *Note that this process can take a while
                   and can't be undone after completion.
@@ -264,6 +264,10 @@ nav.breadcrumbs-section a {
   font-size: 20px;
   font-weight: 700;
 }
+.section-profile .content-profile .titles{
+  font-size: 20px;
+  font-weight: 700;
+}
 .section-profile .menu-profile .link-profile,
 .section-profile .content-profile .form,
 .section-profile .content-profile .info-profile-bottom {
@@ -320,17 +324,7 @@ a {
   max-width: 250px;
   text-align: center;
 }
-.info-profile-bottom .btn-action {
-  border: 1px solid #000;
-  color: #000;
-  padding: 5px 0;
-  display: inline-block;
-  border-radius: 10px;
-  font-size: 12px;
-  width: 100%;
-  max-width: 250px;
-  text-align: center;
-}
+
 @media (min-width: 541px) {
   .form-control {
     width: 100%;
