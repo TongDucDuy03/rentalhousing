@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                   <label> Role </label>
-                  <input v-model="data.role" type="text" class="form-control" />
+                  <input v-model="data.role" type="text" class="form-control form-1" readonly />
                 </div>
 
                 <!-- <div
@@ -60,12 +60,7 @@
                   </div>
                 </div> -->
 
-                <button
-                  type="button"
-                  nh-btn-action="button"
-                  class="btn"
-                  @click="SaveChange"
-                >
+                <button type="button" nh-btn-action="button" class="btn" @click="SaveChange">
                   Save changes
                 </button>
 
@@ -79,7 +74,7 @@
                   and can't be undone after completion.
                 </p>
 
-                <span class="btn-action" @click="DeleteAccount"> DELETE ACCOUNT </span>
+                <button class="btn-action" @click="DeleteAccount">DELETE ACCOUNT</button>
               </div>
             </div>
           </div>
@@ -103,7 +98,7 @@ export default {
     const fetchData = async () => {
       console.log('Calling API...')
       try {
-        const response = await fetch('https://localhost:7083/api/getUser/18')
+        const response = await fetch('https://localhost:7083/api/getUser/1002')
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
@@ -169,7 +164,7 @@ export default {
         username: this.data.username,
         email: this.data.email,
         phone_number: this.data.phone_number,
-        user_id: this.data.user_id // If user_id is required
+        user_id: this.data.user_id
       }
 
       try {
@@ -199,7 +194,7 @@ export default {
     },
     async DeleteAccount() {
       try {
-        const response = await fetch(`https://localhost:7083/api/deleteUser/18`, {
+        const response = await fetch(`https://localhost:7083/api/deleteUser/${this.data.user_id}`, {
           method: 'DELETE'
         })
 
@@ -264,7 +259,7 @@ nav.breadcrumbs-section a {
   font-size: 20px;
   font-weight: 700;
 }
-.section-profile .content-profile .titles{
+.section-profile .content-profile .titles {
   font-size: 20px;
   font-weight: 700;
 }

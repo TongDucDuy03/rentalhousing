@@ -1,12 +1,48 @@
 <script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import LoginUser from '../src/views/LoginUser.vue'
+import InfoUser from './components/InfoUser.vue'
+
+const token = ref(null)
+const router = useRouter()
+
+onMounted(() => {
+  const savedToken = localStorage.getItem('token')
+  if (savedToken) {
+    token.value = savedToken
+  }
+})
+const updateToken = (newToken) => {
+  token.value = newToken
+}
+const logout = () => {
+  localStorage.removeItem('token')
+  token.value = null
+  router.push({ name: 'login' })
+}
 </script>
 
 <template>
-   <LoginUser/> 
+  <div class="section-main">
+    <LoginUser v-if="!token" @login-success="updateToken" />
+    <div v-else>
+      <InfoUser />
+      <button class="btn btn-logout" @click="logout">Logout</button>
+    </div>
+  </div>
 </template>
 
 <style scoped>
+.btn-logout {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -24,20 +60,9 @@ nav {
   margin-top: 2rem;
 }
 
-/* nav a.router-link-exact-active {
-  color: var(--color-text);
-} */
-
 nav a.router-link-exact-active:hover {
   background-color: transparent;
 }
-
-/* nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-} */
-
 nav a:first-of-type {
   border: 0;
 }
@@ -70,21 +95,26 @@ nav a:first-of-type {
 }
 </style>
 <style>
-.btn{
-    align-items: center;
-    border-radius: 10px;
-    color: #fff;
-    display: inline-block;
-    line-height: 1.2;
-    transition: all 0.2s;
-    font-size: 14px;
-    padding: 15px 20px 14px;
-    background-color: #2997dd;
-    border-color: #2997dd;
+.form-1[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
 }
-.btn:hover{
-    background-color: #38dbf8;
-    border-color: #38dbf8;
+.btn {
+  align-items: center;
+  border-radius: 10px;
+  color: #fff;
+  display: inline-block;
+  line-height: 1.2;
+  transition: all 0.2s;
+  font-size: 14px;
+  padding: 15px 20px 14px;
+  background-color: #2997dd;
+  border-color: #2997dd;
+}
+.btn:hover,
+.btn-action:hover {
+  background-color: #38dbf8;
+  border-color: #38dbf8;
 }
 .form-control {
   display: block;
@@ -105,15 +135,15 @@ nav a:first-of-type {
     border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
 }
-.btn-action{
+.btn-action {
   width: 100%;
-    max-width: 250px;
-    text-align: center;
-    border: 1px solid #2997dd;
-    color: #2997dd;
-    padding: 5px 0;
-    display: inline-block;
-    border-radius: 10px;
-    font-size: 12px;
+  max-width: 250px;
+  text-align: center;
+  border: 1px solid #2997dd;
+  color: #2997dd;
+  padding: 5px 0;
+  display: inline-block;
+  border-radius: 10px;
+  font-size: 12px;
 }
 </style>

@@ -5,15 +5,33 @@
       <form @submit.prevent="registerUser">
         <div class="rowp">
           <label for="username">Username:</label>
-          <input v-model="registerData.username" class="form-control" type="text" id="username" required />
+          <input
+            v-model="registerData.username"
+            class="form-control"
+            type="text"
+            id="username"
+            required
+          />
         </div>
         <div class="rowp">
           <label for="email">Email:</label>
-          <input v-model="registerData.email" class="form-control" type="email" id="email" required />
+          <input
+            v-model="registerData.email"
+            class="form-control"
+            type="email"
+            id="email"
+            required
+          />
         </div>
         <div class="rowp">
           <label for="password">Password:</label>
-          <input v-model="registerData.password" class="form-control" type="password" id="password" required />
+          <input
+            v-model="registerData.password"
+            class="form-control"
+            type="password"
+            id="password"
+            required
+          />
         </div>
         <button class="btn" type="submit">Register</button>
       </form>
@@ -26,6 +44,7 @@
 import { ref } from 'vue'
 
 export default {
+  // eslint-disable-next-line vue/multi-word-component-names
   name: 'Register',
   setup() {
     const registerData = ref({
@@ -69,11 +88,11 @@ export default {
 .register {
   padding: 30px;
 }
-.section-register .rowp{
-    padding-bottom: 20px;
+.section-register .rowp {
+  padding-bottom: 20px;
 }
-.btn{
-    min-width: 390px ;
+.btn {
+  min-width: 390px;
 }
 .section-register {
   min-height: 40vh;
